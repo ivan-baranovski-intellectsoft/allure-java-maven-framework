@@ -2,7 +2,7 @@
 [maven]: http://maven.apache.org/
 [git]: http://git-scm.com/
 
-## FinSys API tests
+## API/Mobile tests
 
 ### Getting Started
 

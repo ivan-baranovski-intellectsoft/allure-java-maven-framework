@@ -7,4 +7,10 @@
         </classes>
     </test>
 
+    <test name="BuyProduct">
+        <classes>
+            <class name="org.stormnetdev.tests.mobile.tests.smoketests.BuyProduct" />
+        </classes>
+    </test>
+
 </suite>

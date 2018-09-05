@@ -79,7 +79,6 @@ public class Jira {
 		Long issueStatusId = issue.getStatus().getId();
 		Reporter.logInfo("Issue status name is: " + issueStatusName);
 		Reporter.logInfo("Issue status Id is: " + issueStatusId);
-		Reporter.logPassedOperation();
 		return issueStatusId;
 	}
 

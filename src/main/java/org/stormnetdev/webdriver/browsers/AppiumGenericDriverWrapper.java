@@ -39,7 +39,6 @@ public class AppiumGenericDriverWrapper {
     	try {
     		Reporter.logOperation("Closing Driver...");
     		driver.quit();
-        	Reporter.logPassedOperation();
     	} catch (Exception e)
     	{
     		Reporter.logFailed("Error while closing driver");
@@ -89,7 +88,6 @@ public class AppiumGenericDriverWrapper {
 		else{
 			fillTextField(waitAndfindElement(By.xpath("//UIAPicker//UIAPickerWheel[4]")), "PM");
 		}
-		Reporter.logPassedOperation();
 	}
 	
 	public static void setTime(DateTime dateTimeToSet) {
@@ -102,6 +100,5 @@ public class AppiumGenericDriverWrapper {
 		else{
 			fillTextField(waitAndfindElement(By.xpath("//UIAPicker//UIAPickerWheel[4]")), "PM");
 		}
-		Reporter.logPassedOperation();
-	}   
+	}
 }

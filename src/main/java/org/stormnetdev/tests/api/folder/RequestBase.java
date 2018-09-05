@@ -30,7 +30,6 @@ public class RequestBase {
     protected void reportAPIMethodData(ValidatableResponseOptions result){
         Reporter.logRequest();
         Reporter.logResponse(((Response) result.extract().response()).asString());
-        Reporter.logPassedStep();
     }
 
     public static String getRestAssuredLog() {

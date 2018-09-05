@@ -1,8 +1,8 @@
 package org.stormnetdev.tests.mobile.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.stormnetdev.reporter.Reporter;
 
 import static org.stormnetdev.webdriver.WebDriverWrapper.*;
 
@@ -28,19 +28,16 @@ public class LoginPage {
 
 
 	/** Verify that LoginToEmailForm is displayed**/
-	
+	@Step("Verify that LoginToEmailForm was loaded")
    public static void loaded() {
-       Reporter.logStep("Verify that LoginToEmailForm was loaded");
        waitForElement(By.xpath(headingXpath));
-       Reporter.logPassedStep();
    }
     
 	/** Authorization 
 	 * @throws InterruptedException **/
-	
+	@Step("Authorize with new login and password")
 	public static void authorizeEmail(String login, String password) {
 		if (findElement(By.id(profileInfoLblId)) == null) {
-			Reporter.logStep("Authorize with new login and password");
 			WebElement loginBox = waitAndfindElement(By.id(loginFieldId));
 			clickOnElement(loginBox);
 			clearField(loginBox);
@@ -52,7 +49,6 @@ public class LoginPage {
 			hideKeyboard();
 			WebElement loginBtn = waitAndfindElement(By.id(loginBtnId));
 			clickOnElement(loginBtn);
-			Reporter.logPassedStep();
 			ProfilePage.loaded();
 		}
 	}

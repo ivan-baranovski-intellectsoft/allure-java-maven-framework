@@ -49,37 +49,14 @@ public class Reporter {
         return message;
 	}
 
-//    @Step(">>>Operation: {0}")
     public static void logOperation(String message) {
-        System.out.print("    Operation: " + message);
+        System.out.println("    Operation: " + message);
         description += "<p style='margin-left: 2em;'><b>Operation:</b> " + message + "</p>";
     }
 
     public static void logSubOperation(String message) {
         System.out.print("    > " + message);
         org.testng.Reporter.log("<p style='margin-left: 4em;'><b>></b> " + message + "</p>");
-    }
-
-    @Step("{0}")
-    public static void logStep(String message) {
-        System.out.println(ANSI_BLUE_BOLD + "Step: " + message + ANSI_RESET);
-        if(message.length()>50){
-        	currentStep = message.substring(0, 50);
-        } //TODO: Refactor. Long name Screenshot reporter issue.
-        else{
-        	currentStep = message;
-        }
-        description += "<h2 style='color: #00529B;'><b>Step:</b> " + message + "</h2>";
-    }
-    
-    public static void logPassedOperation() {
-        System.out.println(ANSI_GREEN + "    |    Passed" + ANSI_RESET);
-        description += "<p style='color: #339966; margin-left: 2em;'><b>> </b>Operation Passed</p>";
-    }
-    
-    public static void logPassedStep() {
-        System.out.println(ANSI_GREEN + "Step Passed" + ANSI_RESET);
-        description += "<h2 style='color: #339966; padding-bottom: 1em;'><b>Step Passed</b></h2>";
     }
 
     @Step("{0}")

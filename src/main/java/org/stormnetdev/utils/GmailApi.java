@@ -1,5 +1,6 @@
 package org.stormnetdev.utils;
 
+import io.qameta.allure.Step;
 import org.stormnetdev.reporter.Reporter;
 
 import javax.mail.*;
@@ -39,10 +40,8 @@ public class GmailApi {
      * @param subject
      * @param msg
      */
-	
+	@Step("Sending message with subjest: {subject}")
 	public static Boolean sendEmail(final String username, final String password, final String from, final String to, final String cc, final String bcc, final String subject, final String msg, int numberOfRetries) {
-  
-		Reporter.logStep("Sending message with subjest: " + subject);
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -72,7 +71,6 @@ public class GmailApi {
 			message.setText(msg);
     		Reporter.logSubOperation("Sending" + "\n");
 			Transport.send(message);
-			Reporter.logPassedStep();
 			current = 1;
 			return true;
 		} catch (MessagingException e) {
@@ -98,13 +96,8 @@ public class GmailApi {
      * @param subjectToDelete delete if the message's subject contains this value.
      * @param folder
      */
-	
-    private static Boolean deleteMessages(String userName, String password, String folder, String subjectToDelete, int numberOfRetries, Boolean DeleteAllMessages) throws NullPointerException{ 
-        if(DeleteAllMessages == false){
-        	Reporter.logStep("Deletion of messages that contain name '" + subjectToDelete + "' from folder '" + folder + "'");
-        } else{
-        	Reporter.logStep("Deletion of all messages from folder '" + folder + "'");
-        }
+	@Step("Deletion of messages")
+    private static Boolean deleteMessages(String userName, String password, String folder, String subjectToDelete, int numberOfRetries, Boolean DeleteAllMessages) throws NullPointerException{
     	Session session = Session.getDefaultInstance(getServerProperty());
         try {
             // connects to the message store
@@ -162,7 +155,6 @@ public class GmailApi {
  
             // disconnect
             store.close();
-			Reporter.logPassedStep();
 			current = 1;
 			return true;
         } catch (NoSuchProviderException ex) {
@@ -207,10 +199,9 @@ public class GmailApi {
      * @param password
      * @param folderName
      */
-    
+    @Step("Create folder with name: {folderName}")
     public static Boolean createFolder(String userName, String password, String folderName, int numberOfRetries)   
     {   
-        Reporter.logStep("Create folder with name: " + folderName);
     	Session session = Session.getDefaultInstance(getServerProperty());
         Reporter.logSubOperation("connecting store..");
         boolean isCreated = true;   
@@ -228,7 +219,6 @@ public class GmailApi {
             store.close();
             Reporter.logSubOperation("Created: " + isCreated + "\n");
             if(isCreated == true){
-    			Reporter.logPassedStep();
             } else{
             	Reporter.logFailed("Error during creating the folder with name: " + folderName + ". May the folder has already created.");
             }
@@ -257,9 +247,8 @@ public class GmailApi {
      * @param password
      * @param folder
      */
-    
+    @Step("Deletion folder with name: {folder}" )
     public static Boolean deleteFolder(String userName, String password, String folder, int numberOfRetries) { 
-        Reporter.logStep("Deletion folder with name: " + folder);
     	Session session = Session.getDefaultInstance(getServerProperty());
         try {
             // connects to the message store
@@ -291,7 +280,6 @@ public class GmailApi {
             }           
             // disconnect
             store.close();
-			Reporter.logPassedStep();
             current = 1;
             return true;
         } catch (NoSuchProviderException ex) {
@@ -309,7 +297,6 @@ public class GmailApi {
         } 
         catch (FolderNotFoundException e) {
         	Reporter.logSubOperation("Folder '" + folder + "' not found.");
-			Reporter.logPassedStep();
             return true;
 		}
         catch (MessagingException ex) {

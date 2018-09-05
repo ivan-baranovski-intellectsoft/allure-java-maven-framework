@@ -1,7 +1,7 @@
 package org.stormnetdev.tests.mobile.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.stormnetdev.reporter.Reporter;
 
 import static org.stormnetdev.webdriver.WebDriverWrapper.clickOnElement;
 import static org.stormnetdev.webdriver.WebDriverWrapper.waitAndfindElement;
@@ -22,19 +22,15 @@ public class SelectLoginPage {
 
    
 	/** Verify that SelectLoginPage is displayed**/
-	
+	@Step("Verify that Settings form was loaded")
    public static void loaded() {
-        Reporter.logStep("Verify that Settings form was loaded");
 		waitAndfindElement(By.xpath("//*[@text=\"" + registerBtnName + "\"]"));
-		Reporter.logPassedStep();
    }
 	
 	/** Login with already logged email **/
-	
+	@Step("Login with already logged email")
     public void loginWithLoggedEmail() {
-        Reporter.logStep("Login with already logged email");
 		clickOnElement(waitAndfindElement(By.xpath("//*[@text=\"" + signInBtnName + "\"]")));
-		Reporter.logPassedStep();
 		LoginPage.loaded();
     }
 }

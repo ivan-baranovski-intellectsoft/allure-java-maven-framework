@@ -17,7 +17,6 @@ import org.testng.asserts.SoftAssert;
 import java.util.List;
 
 import static org.stormnetdev.reporter.Reporter.logFailed;
-import static org.stormnetdev.reporter.Reporter.logPassedOperation;
 
 public abstract class WebDriverWrapper {
 	
@@ -53,7 +52,6 @@ public abstract class WebDriverWrapper {
 			TouchActions action = new TouchActions(AppiumEmulatorDriver.driver);
 			action.singleTap(webElement);
 			action.perform();
-	    	logPassedOperation();
 		   } catch (Exception e){
 			   logFailed("Tapping was not performed");
 			   throw(e);
@@ -89,7 +87,6 @@ public abstract class WebDriverWrapper {
 			if (AppiumEmulatorDriver.driver instanceof AndroidDriver){
 				((AndroidDriver) AppiumEmulatorDriver.driver).pressKeyCode(key);
 			}
-	    	logPassedOperation();
 		   } catch (Exception e){
 			   logFailed("Pressing key was not performed");
 			   throw(e);
@@ -132,7 +129,6 @@ public abstract class WebDriverWrapper {
     	Reporter.logOperation("Asserting element: " + element.getAttribute("name") + " contains text: " + text);
     	try {
     		getHardAssertion().assertTrue(element.getAttribute("name").contains(text));
-	    	logPassedOperation();
 		} catch (AssertionError e) {
 			Reporter.logFailed("Expected text: '" + text + "' is not found inside of element: " + element.getAttribute("name"));
 			Assert.fail();
@@ -143,77 +139,46 @@ public abstract class WebDriverWrapper {
      * Wait 30 seconds for locator to find an element 
      */
     public static void waitForElement(By locator){
-    	try{
-			Reporter.logOperation("Wait for element: " + locator);
-			WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 30);
-			Reporter.logOperation("Waiting for element: " + locator);
-			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-			Reporter.logPassedOperation();
-    	}catch(TimeoutException e){
-    		Reporter.logFailed("Timed out after 30 seconds waiting.");
-            throw new RuntimeException(e);
-    	}
+		Reporter.logOperation("Wait for element: " + locator);
+		WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
         
     /**
      * Wait 60 seconds for locator to find an element 
      */
     public static void waitForElementLong(By locator){
-    	try{
     	WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 60);
     	Reporter.logOperation("Waiting for element: " + locator);
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-		Reporter.logPassedOperation();
-    	}catch(TimeoutException e){
-    		Reporter.logFailed("Timed out after 60 seconds waiting.");
-            throw new RuntimeException(e);
-    	}
     }
     
     /**
      * Wait 30 seconds for locator to find all elements *
      */
     public static void waitAll(By locator) {
-    	try{
-    		WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 30);
-    		Reporter.logOperation("Waiting for elements: " + locator);
-    		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
-    		Reporter.logPassedOperation();
-    	}catch(TimeoutException e){
-    		Reporter.logFailed("Timed out after 30 seconds waiting.");
-            throw new RuntimeException(e);
-    	}
+		WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 30);
+		Reporter.logOperation("Waiting for elements: " + locator);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
     
     /**
      * Wait 30 seconds for locator to find all visibility elements *
      */
     public static void waitAllVisibility(By locator) {
-    	try{
-    		WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 30);
-    		Reporter.logOperation("Waiting for elements: " + locator);
-    		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-    		Reporter.logPassedOperation();
-    	}catch(TimeoutException e){
-    		Reporter.logFailed("Timed out after 30 seconds waiting.");
-            throw new RuntimeException(e);
-    	}
+		WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 30);
+		Reporter.logOperation("Waiting for elements: " + locator);
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
     /**
      * Wait 30 seconds for locator to not find a visible element *
      */
     public static boolean waitInvisible(By locator) {
-    	try{
-    		WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
-    		Reporter.logOperation("Waiting for invisible element: " + locator);
-			boolean result = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
-			Reporter.logPassedOperation();
-			return result;
-		}catch(TimeoutException e){
-    		Reporter.logFailed("Element is visible. Timed out after 30 seconds waiting.");
-            throw new RuntimeException(e);
-    	}
+		WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 5);
+		Reporter.logOperation("Waiting for invisible element: " + locator);
+		boolean result = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+		return result;
     } 
     
     /**
@@ -224,7 +189,6 @@ public abstract class WebDriverWrapper {
 		try {
     		Reporter.logOperation("Sleeping for: " + time + " seconds.");
 			Thread.sleep(time * 1000);
-    		Reporter.logPassedOperation();
 		} catch (InterruptedException e) {
     		Reporter.logFailed("Error during sleeping " + time + " seconds.");
 			e.printStackTrace();
@@ -248,7 +212,6 @@ public abstract class WebDriverWrapper {
 			AppiumEmulatorDriver.driver.hideKeyboard();
 // For IOS Driver:
 //			AppiumEmulatorDriver.driver.hideKeyboard(HideKeyboardStrategy.PRESS_KEY, strategy);
-			logPassedOperation();
 		   } catch (Exception e){
 			   logFailed(" The keyboard was not hided.");
 			   throw(e);
@@ -263,7 +226,6 @@ public abstract class WebDriverWrapper {
    	Reporter.logOperation("Hide keyboard");
 		try {
 			clickOnElement(waitAndfindElement(By.name("Done")));
-			logPassedOperation();
 		   } catch (Exception e){
 			   logFailed(" The keyboard was not hided.");
 			   throw(e);
@@ -277,7 +239,6 @@ public abstract class WebDriverWrapper {
    	Reporter.logOperation("Hide keyboard");
 		try {
 			clickOnElement(waitAndfindElement(By.name("Hide keyboard")));
-			logPassedOperation();
 		   } catch (Exception e){
 			   logFailed(" The keyboard was not hided.");
 			   throw(e);
@@ -354,7 +315,6 @@ public abstract class WebDriverWrapper {
 	    	int endY = (int)(size.height * endYPercent/100);
 	    	int startX = (int) (size.width*widthOfScrren);
 	    	swipe(startX, startY, startX, endY);
-	    	logPassedOperation();
 	   } catch (Exception e){
 		   logFailed("Swipe was not performed");
 		   throw(e);
@@ -372,7 +332,6 @@ public abstract class WebDriverWrapper {
 	    	int endX = (int)(size.width * endXPercent/100);
 	    	int startY = size.height/2;
 	    	swipe(startX, startY, endX, startY);
-	    	logPassedOperation();
 	   } catch (Exception e){
 		   logFailed("Swipe was not performed");
 		   throw(e);

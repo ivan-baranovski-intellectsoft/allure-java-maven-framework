@@ -26,8 +26,7 @@ public class WebDriverFactory {
 		WebDriverFactory.driver = driver;
 
 		if (driver != null) {
-			Reporter.logPassedOperation();
-		} 
+		}
 		else {
 			throw new NullPointerException("Driver has not been instantiated");
 		}
@@ -37,7 +36,6 @@ public class WebDriverFactory {
     	Reporter.logOperation("Configuring driver");
 //        getDriver().manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 //        getDriver().manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
-        Reporter.logPassedOperation();
     }
     
     public static void instantiateBrowser() {

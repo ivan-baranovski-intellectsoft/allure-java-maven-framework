@@ -32,7 +32,6 @@ public class GlobalVariablesParser {
 		JSONObject obj = getJsonObject();
 		obj.put(parameter, value);
 		updateJsonFile(obj);
-		Reporter.logPassedOperation();
 	}
 	
 	private JSONObject getJsonObject() {
@@ -43,7 +42,6 @@ public class GlobalVariablesParser {
 			Object obj = parser.parse(fileReader);
 			JSONObject jsonObject = (JSONObject) obj;
 			fileReader.close();
-			Reporter.logPassedOperation();
 			return jsonObject;
 		} catch (IOException e) {
 			Reporter.logFailed("Json was not received.");
@@ -63,7 +61,6 @@ public class GlobalVariablesParser {
 			fileWriter.write(obj.toString());
 			fileWriter.flush();
 			fileWriter.close();
-			Reporter.logPassedOperation();
 		} catch (IOException e) {
 			Reporter.logFailed("Json was not updated.");
 			e.printStackTrace();
@@ -79,7 +76,6 @@ public class GlobalVariablesParser {
 			JSONObject jsonObject = (JSONObject) obj;
 			Reporter.logInfo("Value is: " + (String) jsonObject.get(value));
 			fileReader.close();
-			Reporter.logPassedOperation();
 			return (String) jsonObject.get(value);
 		} catch (IOException e) {
 			Reporter.logFailed("Json was not received.");

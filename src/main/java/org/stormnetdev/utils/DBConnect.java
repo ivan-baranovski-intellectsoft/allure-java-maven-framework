@@ -34,7 +34,6 @@ public class DBConnect {
 					"jdbc:postgresql://" + host + ":5432/" + databaseName + "", "" + databaseUserName + "",
 					"" + databasePassword + "");
 			if (con != null) {
-				Reporter.logPassedOperation();
 				Reporter.logInfo("You made it, take control your database now!");
 			} else {
 				Reporter.logFailed("Failed to make connection!");
@@ -62,8 +61,7 @@ public class DBConnect {
 			while (rs.next()) {
 				resultValue = rs.getString(column);
 			}
-			Reporter.logPassedOperation();
-			Reporter.logInfo(column + " = " + resultValue);			
+			Reporter.logInfo(column + " = " + resultValue);
 			if(resultValue == null){
 				Reporter.logWarning("Value was not found in database.");
 			}				
@@ -84,7 +82,6 @@ public class DBConnect {
 				Reporter.logInfo(rs.getString(column));
 				resultValues.add(rs.getString(column));
 			}
-			Reporter.logPassedOperation();
 			Reporter.logInfo(column + " = " + resultValues);
 			if(resultValues == null){
 				Reporter.logWarning("Value was not found in database.");
@@ -100,7 +97,6 @@ public class DBConnect {
 		Reporter.logOperation("Insert record into database using sql query: " + query);
 		st = con.createStatement();
 		st.executeUpdate(query);
-		Reporter.logPassedOperation();
 	}
 	
 	public void deleteData(String query) throws SQLException{
@@ -108,7 +104,6 @@ public class DBConnect {
 		try {
 			st = con.createStatement();
 			st.executeUpdate(query);
-			Reporter.logPassedOperation();
 		} catch (PSQLException e) {
 			Reporter.logFailed("Record was not deleted." + e.getMessage());
 			throw new SQLException();
@@ -120,7 +115,6 @@ public class DBConnect {
 		try {
 			st = con.createStatement();
 			st.executeUpdate(query);
-			Reporter.logPassedOperation();
 		} catch (PSQLException e) {
 			Reporter.logFailed("Record was not updated." + e.getMessage());
 			throw new SQLException();

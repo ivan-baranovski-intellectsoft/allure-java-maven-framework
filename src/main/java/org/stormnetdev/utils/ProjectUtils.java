@@ -1,7 +1,7 @@
 package org.stormnetdev.utils;
 
 import io.restassured.response.Response;
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.stormnetdev.reporter.Reporter;
 import org.stormnetdev.utils.transactions.Convert;
@@ -17,8 +17,7 @@ import java.util.Random;
 import java.util.TimeZone;
 
 import static java.lang.Math.*;
-import static org.apache.commons.lang.StringUtils.leftPad;
-import static org.stormnetdev.reporter.Reporter.logPassedOperation;
+import static org.apache.commons.lang3.StringUtils.leftPad;
 import static org.testng.Assert.fail;
 
 public class ProjectUtils {
@@ -42,7 +41,6 @@ public class ProjectUtils {
 		try {
     		Reporter.logOperation("Sleeping for: " + time + " seconds.");
 			Thread.sleep(time * 1000);
-    		Reporter.logPassedOperation();
 		} catch (InterruptedException e) {
     		Reporter.logFailed("Error during sleeping " + time + " seconds.");
 			e.printStackTrace();
@@ -57,7 +55,6 @@ public class ProjectUtils {
     	Reporter.logOperation("Asserting element '" + assertionElement + "' lengh is : " + assertionLengh);
     	try {
     		getHardAssertion().assertTrue(response.path(assertionElement).toString().length() == assertionLengh);
-	    	logPassedOperation();
 		} catch (AssertionError e) {
 			Reporter.logFailed("Expected: " + assertionLengh + " symbols \n" + "Actual: " + response.path(assertionElement).toString().length() + " symbols");
 			Assert.fail();
@@ -77,7 +74,6 @@ public class ProjectUtils {
 		}
 		String phoneNumber = "+" + phone;
 		Reporter.logInfo("Phone is " + phoneNumber);
-		logPassedOperation();
 		return phoneNumber;
 	}
 
@@ -89,7 +85,6 @@ public class ProjectUtils {
 		Reporter.logOperation("Generate random passphrase.");
 		String passphrase = "test passphrase #" + DateTime.now().getMillis();
 		Reporter.logInfo("Passphrase is " + passphrase);
-		logPassedOperation();
 		return passphrase;
 	}
 
@@ -102,14 +97,13 @@ public class ProjectUtils {
 		StringBuffer sb = new StringBuffer();
 		for (int i = length/2; i > 0; i -= 12) {
 			int n = min(12, abs(i));
-			sb.append(leftPad(Long.toString(round(random() * pow(36, n)), 36), n, '0'));
+			sb.append(leftPad(Long.toString(round(random() * pow(36, n)), 36), n, "0"));
 		}
 		String publicKey = sb.toString();
 
 		byte[] message = Convert.toBytes(publicKey);
 		publicKey = Convert.toHexString(message);
 		Reporter.logInfo("Public key is " + publicKey);
-		logPassedOperation();
 		return publicKey;
 	}
 
@@ -145,7 +139,6 @@ public class ProjectUtils {
 	public static int randomInt(int min, int max) {
 		Reporter.logOperation("Generate random integer number between " + min + " value and " + max);
 		Random random = new Random();
-		Reporter.logPassedOperation();
 		return random.nextInt(max - min + 1) + min;
 	}
 
@@ -155,7 +148,6 @@ public class ProjectUtils {
 
 	public static long randomLong(int min, int max) {
 		Reporter.logOperation("Generate random long number between " + min + " value and " + max);
-		Reporter.logPassedOperation();
 		long generatedLong = min + (long) (Math.random() * (max - min));
 		return generatedLong;
 	}
@@ -173,7 +165,6 @@ public class ProjectUtils {
 			stringNumber += random.nextInt(9);
 			i++;
 		}
-		Reporter.logPassedOperation();
 		return stringNumber;
 	}
 

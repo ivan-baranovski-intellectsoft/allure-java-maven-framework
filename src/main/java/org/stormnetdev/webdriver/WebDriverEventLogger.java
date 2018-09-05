@@ -17,14 +17,12 @@ public class WebDriverEventLogger implements WebDriverEventListener {
 	@Override
 	public void afterChangeValueOf(WebElement element, WebDriver arg1, CharSequence[] arg2) {
 		Reporter.logSubOperation("Changed value to: '" + newValue + "'");
-		Reporter.logPassedOperation();
-		
+
 	}
 
 	@Override
 	public void afterClickOn(WebElement arg0, WebDriver arg1) {
-		Reporter.logPassedOperation();
-		
+
 	}
 
 	@Override
@@ -34,14 +32,12 @@ public class WebDriverEventLogger implements WebDriverEventListener {
 
 	@Override
 	public void afterNavigateBack(WebDriver arg0) {
-		Reporter.logPassedOperation();
-		
+
 	}
 
 	@Override
 	public void afterNavigateForward(WebDriver arg0) {
-		Reporter.logPassedOperation();
-		
+
 	}
 
 	@Override
@@ -56,14 +52,12 @@ public class WebDriverEventLogger implements WebDriverEventListener {
 
 	@Override
 	public void afterNavigateTo(String arg0, WebDriver arg1) {
-		Reporter.logPassedOperation();
-	
+
 	}
 
 	@Override
 	public void afterScript(String arg0, WebDriver arg1) {
-		Reporter.logPassedOperation();
-		
+
 	}
 
 	@Override

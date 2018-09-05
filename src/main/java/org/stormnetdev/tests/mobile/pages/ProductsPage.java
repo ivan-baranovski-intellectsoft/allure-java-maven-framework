@@ -1,7 +1,7 @@
 package org.stormnetdev.tests.mobile.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.stormnetdev.reporter.Reporter;
 
 import java.util.Calendar;
 
@@ -22,30 +22,27 @@ public class ProductsPage {
    private static String tomorrowPageLblName = "picks with US $0.01";
 
   	/** Verify that CoinsPage is displayed**/
-	
-   public static void loaded() {
-       Reporter.logStep("Verify that ProductsPage was loaded");
+    @Step("Verify that ProductsPage was loaded")
+    public static void loaded() {
        waitForElement(By.xpath("//android.widget.TextView[contains(@text,\"" + tomorrowPageLblName + "\")]"));
-       Reporter.logPassedStep();
    }
 
     /** Open 0.01$ tomorrow page**/
-
+    @Step("Buy product")
     public void buySelectedProduct() {
-        Reporter.logStep("Buy product");
-        waitForTime(10);
-        clickOnElement(waitAndfindElement(By.xpath("//*[@text=\"" + productPriceLblName + "\"]")));
-        clickOnElement(waitAndfindElement(By.id("com.alibaba.aliexpresshd:id/rl_coins_exchange_btn")));
-
-        //Select parameters
-        clickOnElement(waitAndfindElement(By.xpath("//android.widget.RadioGroup[1]/android.widget.CompoundButton[3]")));
-//        clickOnElement(waitAndfindElement(By.xpath("//android.widget.RadioGroup[2]/android.widget.CompoundButton[2]")));
-
-
-        clickOnElement(waitAndfindElement(By.id("com.alibaba.aliexpresshd:id/tv_apply_options")));
-        clickOnElement(waitAndfindElement(By.id("com.alibaba.aliexpresshd:id/bt_place_order")));
-        sleep(15);
-        Reporter.logPassedStep();
+//        waitForTime(10);
+        waitForElement(By.xpath("//*[@text=\"" + productPriceLblName + "\"]"));
+//        clickOnElement(waitAndfindElement(By.xpath("//*[@text=\"" + productPriceLblName + "\"]")));
+//        clickOnElement(waitAndfindElement(By.id("com.alibaba.aliexpresshd:id/rl_coins_exchange_btn")));
+//
+//        //Select parameters
+//        clickOnElement(waitAndfindElement(By.xpath("//android.widget.RadioGroup[1]/android.widget.CompoundButton[3]")));
+////        clickOnElement(waitAndfindElement(By.xpath("//android.widget.RadioGroup[2]/android.widget.CompoundButton[2]")));
+//
+//
+//        clickOnElement(waitAndfindElement(By.id("com.alibaba.aliexpresshd:id/tv_apply_options")));
+//        clickOnElement(waitAndfindElement(By.id("com.alibaba.aliexpresshd:id/bt_place_order")));
+//        sleep(15);
     }
 
     private void waitForTime(int hours) {

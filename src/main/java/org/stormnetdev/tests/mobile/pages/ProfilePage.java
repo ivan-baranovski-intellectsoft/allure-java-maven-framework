@@ -1,7 +1,7 @@
 package org.stormnetdev.tests.mobile.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.stormnetdev.reporter.Reporter;
 
 import static org.stormnetdev.webdriver.WebDriverWrapper.waitForElement;
 
@@ -19,10 +19,8 @@ public class ProfilePage extends MainPage {
    private static String profileInfoLblId = "com.alibaba.aliexpresshd:id/profile_text_info";
 
   	/** Verify that LoginToEmailForm is displayed**/
-	
+	@Step("Verify that ProfilePage was loaded")
    public static void loaded() {
-       Reporter.logStep("Verify that ProfilePage was loaded");
        waitForElement(By.id(profileInfoLblId));
-       Reporter.logPassedStep();
    }
 }
